@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { api } = require('../config/index');
-const user = require('./components/user/controller')
+const user = require('./components/user/network')
 
 app.use('/api/user', user);
 

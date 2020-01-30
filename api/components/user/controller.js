@@ -1,11 +1,21 @@
-const express = require('express');
-const response = require('../../../utils/response')
-const Action = require('./action')
-const router = express.Router();
+const TABLE = "user";
 
-router.get('/', (req,res) => {
-    const lista = Action.list();
-    response.success(req,res, lista, 200);
-});
+module.exports = (injectedStore) => {
+  let store = injectedStore;
+  if (!store) {
+    store = require("../../../store/dummy");
+  }
 
-module.exports = router
+  const list = () => {
+    return store.list(TABLE);
+  };
+
+  const get = (id) => {
+    return store.get(TABLE, id);
+  };
+
+  return {
+    list,
+    get
+  };
+};
