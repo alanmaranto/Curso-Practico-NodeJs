@@ -1,18 +1,25 @@
 const db = {
-  user: [{ id: '1', name: "Carlos" }]
+  'user': [{ id: '1', name: "Carlos" }]
 };
 
-const list = async table => {
+async function list (table) {
   return db[table];
 };
-const get = async (table, id) => {
+
+async function get (table, id) {
   let collection = await list(table);
   return collection.filter(item => item.id === id)[0] || null;
 };
-const upsert = async (table, data) => {
-  await db[collection].push(data);
+
+async function upsert (table, data) {
+  if (!db[table]) {
+    db[table] = [];
+  }
+  db[table].push(data);
+  console.log(db);
 };
-const remove = async (table, id) => {
+
+async function remove (table, id) {
   return true;
 };
 
