@@ -1,7 +1,7 @@
 const express = require("express");
 
 const response = require("../../../utils/response");
-const Controller = require("./index");
+const UserController = require("./index");
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.put("/", upsert);
 // Async Await
 async function list(req, res, next) {
   try {
-    const acutalList = await Controller.list();
+    const acutalList = await UserController.list();
     response.success(req, res, acutalList, 200);
   } catch (error) {
     response.error(req, res, error.message, 500);
@@ -24,7 +24,7 @@ async function list(req, res, next) {
 
 // Promise
 function get(req, res, next) {
-  Controller.get(req.params.id)
+  UserController.get(req.params.id)
     .then(user => {
       response.success(req, res, user, 200);
     })
@@ -33,7 +33,7 @@ function get(req, res, next) {
 
 function upsert(req, res, next) {
   try {
-    const user = Controller.upsert(req.body);
+    const user = UserController.upsert(req.body);
     response.success(req, res, user, 201);
   } catch(error) {
     response.error(req, res, error.message, 500);
