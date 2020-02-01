@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { api } = require('../config/index');
+const { config } = require('../config/index');
 
 const user = require('./components/user/network')
 const auth = require('./components/auth/network')
@@ -15,6 +15,6 @@ app.use('/api/user', user);
 app.use('/api/auth', auth);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
-app.listen(api.port, () => {
-    console.log(`Api escuchando en el puerto ${api.port}`)
+app.listen(config.port, () => {
+    console.log(`Api escuchando en el puerto ${config.port}`)
 })

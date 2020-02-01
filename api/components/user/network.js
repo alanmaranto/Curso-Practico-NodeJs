@@ -24,7 +24,8 @@ async function list(req, res, next) {
 
 // Promise
 function get(req, res, next) {
-  UserController.get(req.params.id)
+  const { id } = req.params
+  UserController.get(id)
     .then(user => {
       response.success(req, res, user, 200);
     })
