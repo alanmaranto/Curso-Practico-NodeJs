@@ -20,6 +20,7 @@ async function list(req, res, next) {
     response.success(req, res, acutalList, 200);
   } catch (error) {
     response.error(req, res, error.message, 500);
+    return next(error)
   }
 }
 
@@ -39,6 +40,7 @@ function upsert(req, res, next) {
     response.success(req, res, user, 201);
   } catch(error) {
     response.error(req, res, error.message, 500);
+    return next(error)
   };
 }
 
