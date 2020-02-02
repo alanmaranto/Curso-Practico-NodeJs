@@ -1,5 +1,6 @@
 const express = require("express");
 
+const secure = require('./secure')
 const response = require("../../../utils/response");
 const UserController = require("./index");
 
@@ -9,7 +10,7 @@ const router = express.Router();
 router.get("/", list);
 router.get("/:id", get);
 router.post("/", upsert);
-router.put("/", upsert);
+router.put("/", secure('update'),upsert);
 
 //Internal functions
 // Async Await

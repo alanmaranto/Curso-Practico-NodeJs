@@ -7,9 +7,12 @@ module.exports = function checkAuth(action) {
       case "update":
         const owner = id;
         auth.check.own(req, owner);
+        next();
         break;
       default:
         next();
     }
   }
+
+  return middleware;
 };

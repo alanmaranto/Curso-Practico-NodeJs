@@ -13,7 +13,14 @@ const check = {
     own: function (req, owner) {
         const decoded = decodeHeader(req);
         console.log(decoded);
-    }
+        //Comprobar si es o no el usuario
+
+        if (decoded.id !== owner) {
+            throw new Error(`You can't do it`);
+        }
+
+    }, 
+    
 }
 
 function getToken (auth) {
