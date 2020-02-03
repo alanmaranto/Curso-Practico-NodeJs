@@ -13,6 +13,9 @@ const config = {
     password: process.env.MYSQL_PASS,
     database: process.env.MYSQL_DB,
     port: process.env.MYSQL_PORT || "3306",
+  },
+  mysqlService: {
+    port: process.env.MYSQl_SRV_PORT || 3001
   }
 };
 
