@@ -71,15 +71,21 @@ function update(table, data) {
 
 function upsert(table, data) {
   if (data && data.id) {
-    console.log('data', data)
-    console.log('dataid', data.id)
+    console.log("data", data);
+    console.log("dataid", data.id);
     return update(table, data);
   } else {
     return insert(table, data);
   }
 }
 
-function query(table, query) {
+function query(table, query, join) {
+  let joinQuery = "";
+  if (join) {
+    const key = Object.keys(join)[0];
+    const value = join[key];
+    joinQuery = `JOIN ${key} ON ${table}.${value} = ${key}.id`;
+  }
   return new Promise((resolve, reject) => {
     connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
       if (err) return reject(err);
