@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const auth = require("../../../auth");
-const TABLE = "auth";
+const TABLE = "Auth";
 
 module.exports = function(injectedStore) {
   let store = injectedStore;
@@ -17,12 +17,12 @@ module.exports = function(injectedStore) {
       throw new Error("Informacion invalida");
     }
     //Generar token
-    return auth.sign(data);
+    return auth.sign({...data});
   }
 
-  async function upsert(data) {
+   async function upsert(data) {
     const authData = {
-      id: data.id
+      id: data.id,
     };
 
     // Si hay usuario lo actualiza

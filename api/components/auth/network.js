@@ -5,14 +5,14 @@ const AuthController = require("./index");
 
 const router = express.Router();
 
-router.post("/login", async function(req, res) {
+router.post("/login", function(req, res, next) {
   const { username, password } = req.body;
-  try {
-    const login = await AuthController.login(username, password);
-    response.success(req,res, login, 200)
-  } catch (error) {
-      response.error(req,res, 'Informacion invalida', 400 )
-  }
+  console.log("hola", req.body);
+  AuthController.login(username, password)
+    .then(token => {
+      response.success(req, res, token, 200);
+    })
+    .catch(next);
 });
 
 module.exports = router;
