@@ -56,7 +56,6 @@ function insert(table, data) {
 }
 
 function update(table, data) {
-  console.log("updateData", data);
   return new Promise((resolve, reject) => {
     connection.query(
       `UPDATE ${table} SET ? WHERE id=?`,
@@ -69,15 +68,14 @@ function update(table, data) {
   });
 }
 
-function upsert(table, data) {
-  if (data && data.id) {
-    console.log("data", data);
-    console.log("dataid", data.id);
-    return update(table, data);
-  } else {
-    return insert(table, data);
-  }
-}
+const upsert = async (table, payload) => new Promise((resolve, reject) => {
+  connection.query(`INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`, [payload, payload], (error, data) => {
+    if (error) {
+      return reject(error)
+    }
+    resolve(data)
+  })
+})
 
 function query(table, query, join) {
   let joinQuery = "";
@@ -86,6 +84,7 @@ function query(table, query, join) {
     const value = join[key];
     joinQuery = `JOIN ${key} ON ${table}.${value} = ${key}.id`;
   }
+
   return new Promise((resolve, reject) => {
     connection.query(`SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`, query, (err, res) => {
       if (err) return reject(err);
@@ -98,5 +97,7 @@ module.exports = {
   list,
   get,
   upsert,
-  query
+  query,
+  insert,
+  update,
 };

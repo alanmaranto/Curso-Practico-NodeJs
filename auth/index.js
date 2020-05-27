@@ -13,7 +13,6 @@ function verifyToken(token) {
 const check = {
   own: function(req, owner) {
     const decoded = decodeHeader(req);
-    console.log(decoded);
     //Comprobar si es o no el usuario
 
     if (decoded.id !== owner) {
@@ -22,12 +21,7 @@ const check = {
   },
   logged: function(req, owner) {
     const decoded = decodeHeader(req);
-    console.log(decoded);
     //Comprobar si es o no el usuario
-
-    if (decoded.id !== owner) {
-      throw error(`You can't do it`, 401);
-    }
   },
 };
 

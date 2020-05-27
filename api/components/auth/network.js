@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post("/login", function(req, res, next) {
   const { username, password } = req.body;
-  console.log("hola", req.body);
   AuthController.login(username, password)
     .then(token => {
       response.success(req, res, token, 200);

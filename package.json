@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon api/index.js",
-    "micro": "nodemon mysql/index.js",
-    "post": "nodemon post/index.js"
+    "micro": "nodemon mysql/index-mysql.js",
+    "post": "nodemon post/index-post.js"
   },
   "author": "",
   "license": "ISC",

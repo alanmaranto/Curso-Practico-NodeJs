@@ -16,7 +16,6 @@ async function upsert (table, data) {
     db[table] = [];
   }
   db[table].push(data);
-  console.log(db);
 };
 
 async function remove (table, id) {

@@ -35,6 +35,12 @@ function createRemoteDB(host, port) {
     let url = `${URL}/${table}`;
     body = "";
 
+    if (method === 'GET' && data) {
+      url += '/' + data;
+    } else if (data) {
+      body = JSON.stringify(data);
+    }
+
     return new Promise((resolve, reject) => {
       request(
         {
@@ -47,7 +53,7 @@ function createRemoteDB(host, port) {
         },
         (err, req, body) => {
           if (err) {
-            console.error("Error with remote DB");
+            console.error("Error with remote DB", err);
             return reject(err.message);
           }
 
@@ -60,10 +66,10 @@ function createRemoteDB(host, port) {
 
   return {
     list,
-    get,
-    insert,
-    query,
     upsert,
+    get,
+    query,
+    insert,
     update,
   };
 }
