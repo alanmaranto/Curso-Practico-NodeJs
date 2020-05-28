@@ -32,7 +32,7 @@ async function upsert(req, res, next) {
 }
 
 async function query(req, res, next) {
-  const data = await store.query(
+  const data = await tore.query(
     req.params.table,
     req.body.query,
     req.body.join

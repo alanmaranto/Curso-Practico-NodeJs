@@ -32,7 +32,7 @@ module.exports = function(injectedStore) {
       post.id = nanoid();
     }
 
-    return Store.upsert(TABLE, post).then(() => post);
+    return store.upsert(TABLE, post).then(() => post);
   }
 
   async function like(post, user) {
