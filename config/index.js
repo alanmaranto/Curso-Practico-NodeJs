@@ -22,6 +22,10 @@ const config = {
     port: process.env.POST_PORT || 3002,
   },
   remoteDB: process.env.REMOTE_DB || false,
+  cacheService: {
+    port: process.env.REDIS_SRV_PORT || 3003,
+    host: process.env.REDIS_SRV_HOST || "localhost",
+  },
 };
 
 module.exports = { config };
